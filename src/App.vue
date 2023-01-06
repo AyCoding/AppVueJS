@@ -1,7 +1,17 @@
 <template>
-  <h1>Lorem ipsum dolor sit amet.</h1>
+  <RestaurantCard/>
+ </template>
 
-</template>
+<script>
+import RestaurantCard from './components/RestaurantCard.vue'
+
+export default {
+  name: 'App',
+  components: {
+    RestaurantCard
+  }
+}
+</script>
 
 <style>
 @import url("https://unpkg.com/reset-css@5.0.1/reset.css");
@@ -12,8 +22,5 @@ body {
   font-family: 'Poppins', sans-serif;
   box-sizing: content-box;
   font-size: 16px;
-}
-h1 {
-  font-size: 30px;
 }
 </style>
