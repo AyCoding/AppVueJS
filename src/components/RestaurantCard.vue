@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  name: "RestaurantCard.vue",
+  name: "RestaurantCard",
 }
 </script>
 
