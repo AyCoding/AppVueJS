@@ -23,6 +23,6 @@ body {
   box-sizing: content-box;
   font-size: 16px;
   margin: 0;
-  padding: 20px;
+  padding: 0 20px;
 }
 </style>
