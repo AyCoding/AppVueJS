@@ -1,6 +1,23 @@
-import { createApp } from 'vue'
+import {createApp} from 'vue'
 import App from './App.vue'
 
-const app = createApp(App)
+import {createRouter, createWebHashHistory} from 'vue-router'
+import Home from './page/Home.vue'
+import Restaurant from "./page/Restaurant.vue";
+import * as path from "path";
 
-app.mount('#app')
+const routes = [
+    {path: '/', component: Home},
+    {name: 'Restaurant', path: '/restaurant/:name', component: Restaurant}
+]
+
+const router = createRouter({
+    history: createWebHashHistory(),
+    routes
+})
+
+const VueApp = createApp(App)
+
+VueApp.use(router)
+
+VueApp.mount('#app')

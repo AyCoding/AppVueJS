@@ -2,7 +2,19 @@
   <div class="home">
     <div class="header">
       <img src="https://d3i4yxtzktqr9n.cloudfront.net/web-eats-v2/ee037401cb5d31b23cf780808ee4ec1f.svg" alt="">
-      <input v-model="user_search_restaurant" type="text" placeholder="De quoi avez vous envie ?">
+      <div class="wrapper--input">
+        <input v-model="user_search_restaurant" type="text" placeholder="De quoi avez vous envie ?">
+        <div class="search">
+          <RouterLink v-for="(restaurant, i) in search_restaurant" :key="i" :to="{name: 'Restaurant', params: {name:restaurant.name}}">
+            <div class="container--restaurant--search">
+              <div class="wrapper--img">
+                <img :src="restaurant.image" alt="">
+              </div>
+              <p>{{ restaurant.name }}</p>
+            </div>
+          </RouterLink>
+        </div>
+      </div>
     </div>
     <div class="banner"></div>
     <RestaurantRow v-for="(data, index) in data_restaurant" :three_restaurant="data"/>
@@ -54,12 +66,21 @@ export default {
     }
     // User search restaurant
     let user_search_restaurant = ref('')
+    let search_restaurant = ref([])
 
     watch(user_search_restaurant, new_value => {
-      let regex = RegExp(new_value)
-      let search_restaurant = all_restaurant.filter(restaurant => regex.test(restaurant.name))
 
-      console.log(search_restaurant)
+      let regex = RegExp(new_value.toLowerCase())
+
+      let new_search_restaurant = all_restaurant.filter(restaurant => regex.test(restaurant.name.toLowerCase()))
+
+      search_restaurant.value = new_search_restaurant
+
+      if (new_value == 0) {
+        search_restaurant.value = []
+      } else {
+        search_restaurant.value = new_search_restaurant
+      }
     })
 
     onMounted(makeDataRestaurant)
@@ -67,7 +88,8 @@ export default {
     // RETURN
     return {
       data_restaurant,
-      user_search_restaurant
+      user_search_restaurant,
+      search_restaurant
     }
   },
 }
@@ -85,16 +107,48 @@ export default {
 
     img {
       max-width: 200px;
+
+
     }
 
-    input {
-      font-family: 'Poppins', sans-serif;
-      background-color: #f6f6f6;
-      border: none;
-      width: 400px;
-      height: 60px;
-      outline: none;
-      text-indent: 20px;
+    .wrapper--input {
+      position: relative;
+
+      input {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f6f6f6;
+        border: none;
+        width: 400px;
+        height: 60px;
+        outline: none;
+        text-indent: 20px;
+      }
+
+      .search {
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        background: #fff;
+
+        .container--restaurant--search {
+          display: flex;
+          align-items: center;
+          padding: 10px;
+
+          .wrapper--img {
+            width: 60px;
+            height: 60px;
+            margin-right: 25px;
+            border-radius: 50%;
+            overflow: hidden;
+
+            img {
+              width: auto;
+              height: 100%;
+            }
+          }
+        }
+      }
     }
   }
 

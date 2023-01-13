@@ -1,5 +1,5 @@
 <template>
-  <Home/>
+  <RouterView/>
 </template>
 
 <script>
