@@ -4,7 +4,9 @@
       Nos restaurant !
     </h2>
     <div class="wrapper--card">
-      <RestaurantCard v-for="(card,index) in three_restaurant" :info_restaurant="card" :key="index"/>
+      <RouterLink class="restaurant--wrapper" v-for="(card,index) in three_restaurant" :key="index" :to="{name: 'Restaurant', params: {name:card.name}}">
+        <RestaurantCard :info_restaurant="card"/>
+      </RouterLink>
     </div>
   </div>
 </template>
@@ -17,7 +19,7 @@ export default {
   components: {
     RestaurantCard
   },
-  props : {
+  props: {
     three_restaurant: Array
   }
 }
@@ -25,9 +27,18 @@ export default {
 
 <style lang="scss">
 .restaurant--row {
+  .restaurant--wrapper {
+    width: 32%;
+    text-decoration: none;
+    color: #000;
+    &:hover {
+      color: #555;
+    }
+  }
   .title {
     font-size: 2rem;
   }
+
   .wrapper--card {
     display: flex;
     justify-content: space-between;

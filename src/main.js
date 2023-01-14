@@ -4,7 +4,6 @@ import App from './App.vue'
 import {createRouter, createWebHashHistory} from 'vue-router'
 import Home from './page/Home.vue'
 import Restaurant from "./page/Restaurant.vue";
-import * as path from "path";
 
 const routes = [
     {path: '/', component: Home},
